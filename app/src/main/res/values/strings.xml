@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Re</string>
+    <string name="title_activity_maint2">Maint2</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">收藏</string>
+    <string name="title_notifications">关于</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2</string>
+</resources>
