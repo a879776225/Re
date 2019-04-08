@@ -22,7 +22,7 @@ public class MyCurosrAdapter extends CursorAdapter {
 
 
     public CharSequence convertToString(Cursor cursor) {
-        return cursor==null ? "":cursor.getString(cursor.getColumnIndex("_id"));
+        return cursor==null ? "":cursor.getString(cursor.getColumnIndex("name"));
     }
 
     private void setView(View view, Cursor cursor) {
@@ -36,7 +36,7 @@ public class MyCurosrAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         View view = layoutInflater.inflate(R.layout.info_item, null);
-        setView(view,cursor);
+//        setView(view,cursor);
         return view;
     }
 
@@ -45,4 +45,5 @@ public class MyCurosrAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         setView(view,cursor);
     }
+
 }
