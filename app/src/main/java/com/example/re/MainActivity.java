@@ -47,6 +47,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 //    private static final String TAG = ;
+//    private static String userID;
     public final String DATA_PATH=Environment.getExternalStorageDirectory().getPath()+"/redata";
     String filePath= Environment.getExternalStorageDirectory().getPath()+"/a.txt";
 
@@ -102,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void actionStart(Context context, String data1, String data2) {
         Intent intent = new Intent(context, Main2.class);
-        intent.putExtra("param1", data1);
-//        intent.putExtra("param2", data2);
+        intent.putExtra("param",data2);
         context.startActivity(intent);
     }
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String send(final String name, final String pwd) {
-         String responsData=null ;
+         final String responsData=null ;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -144,9 +144,11 @@ public class MainActivity extends AppCompatActivity {
                             .post(requestBody)
                             .build();
                     Response response = client.newCall(request).execute();
-                    String  responsData =response.body().string();
-                            showResponse(responsData);
+                    String re[]=response.body().string().split("s");
 
+                    String  responsData =re[0];
+                    showResponse(responsData,re[1]);
+                    Log.e("MainActiviy", re[1]);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -157,13 +159,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showResponse(final String response) {
+    private void showResponse(final String response, final String userid) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 String s="true";
                 if(s.equals(response))
-                actionStart(MainActivity.this,name.getText().toString(),"");
+                actionStart(MainActivity.this,"",userid);
                else
                    name.setText(response);
             }

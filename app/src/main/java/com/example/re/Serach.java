@@ -1,7 +1,9 @@
 package com.example.re;
 
 
-import android.content.ClipData;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,7 +11,6 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,15 +24,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Serach extends Fragment implements TextWatcher {
     private List<Info> infoList = new ArrayList<>();
-    private Button serach;
+    private Info saveinfo;
+    private Button save;
     private Sqldatabase sqldatabase;
     private SQLiteDatabase database;
     private Cursor cursor;
@@ -56,16 +56,32 @@ public class Serach extends Fragment implements TextWatcher {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        serach = getActivity().findViewById(R.id.button2serach);
+        save= getActivity().findViewById(R.id.button2serach);
         textViewinfoall = getActivity().findViewById(R.id.textView4allinfo);
         textViewinfoall.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         autoCompleteTextView = getActivity().findViewById(R.id.autoCompleteTextView);
         autoCompleteTextView.addTextChangedListener(this);
 
 //        autoCompleteTextView.setAdapter();
-        serach.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (saveinfo != null) {
+
+                    ContentValues values = new ContentValues();
+                    values.put("_id", saveinfo.getIdnum());
+                    values.put("dean", saveinfo.getDean());
+                    values.put("classname", saveinfo.getClassname());
+                    values.put("name", saveinfo.getName());
+                    values.put("addres", saveinfo.getAdress());
+                    values.put("date", saveinfo.getBrithdate());
+                    values.put("lunar", saveinfo.getLunar_brithday());
+                    values.put("citv", saveinfo.getCity());
+                    values.put("num", saveinfo.getPhonenum());
+                    values.put("md", saveinfo.getMd());
+                    database.insert("u_like", null, values);
+                }
+
                 Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
             }
         });
@@ -103,7 +119,17 @@ public class Serach extends Fragment implements TextWatcher {
                 else{
                     cursor.moveToFirst();
 //                    textViewinfoall.setText(cursor.getString(0));
-
+                saveinfo=new Info(cursor.getString(0)
+                      ,cursor.getString(1)
+                      ,cursor.getString(2)
+                      ,cursor.getString(3)
+                      ,cursor.getString(4)
+                      ,cursor.getString(5)
+                      ,cursor.getString(6)
+                      ,cursor.getString(7)
+                      ,cursor.getString(8)
+                        ,cursor.getString(9)
+                );
                 info= cursor.getString( 0)+"\n"+
                         cursor.getString(1)+"\n"+
                         cursor.getString(2)+"\n"+
@@ -111,10 +137,7 @@ public class Serach extends Fragment implements TextWatcher {
                         cursor.getString(4)+"\n"+
                         cursor.getString(5)+"\n"+
                         cursor.getString(6)+"\n"+
-
-                        cursor.getString(7)+"\n"+
-                        cursor.getString(8)
-                       ;
+                        cursor.getString(8);
                 textViewinfoall.setText(info);
             }}
         });

@@ -11,9 +11,10 @@
     <EditText
         android:id="@+id/textView"
         android:layout_width="437dp"
-        android:layout_height="63dp"
 
-        android:text="1" />
+        android:layout_height="63dp"
+        android:hint="用户名"
+        android:text="tom" />
 
     <EditText
         android:id="@+id/textView3"
@@ -22,11 +23,12 @@
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
 
-        android:text="1" />
+        android:hint="密码"
+        android:text="2456" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="169dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_marginBottom="15dp"
         android:text="登录" />
