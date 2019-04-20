@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -44,13 +46,22 @@ public class Collect extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        listView = getActivity().findViewById(R.id.listview);
+        View view = inflater.inflate(R.layout.fragment_collect, container, false);
+
+        listView = view.findViewById(R.id.listview);
         Main2 main2 = (Main2) getActivity();
 
 //      = getFriends();
         MyAdapter adapter=new MyAdapter(getActivity(),R.layout.info_item,main2.getResponsData());
+        Log.e("Co", main2.getResponsData().get(0).getName());
         listView.setAdapter(adapter);
-        return inflater.inflate(R.layout.fragment_collect, container, false);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+        return view;
 
     }
 

@@ -69,7 +69,7 @@ public class Serach extends Fragment implements TextWatcher {
                 if (saveinfo != null) {
 
                     ContentValues values = new ContentValues();
-                    values.put("_id", saveinfo.getIdnum());
+//                    values.put("_id", saveinfo.getIdnum());
                     values.put("dean", saveinfo.getDean());
                     values.put("classname", saveinfo.getClassname());
                     values.put("name", saveinfo.getName());

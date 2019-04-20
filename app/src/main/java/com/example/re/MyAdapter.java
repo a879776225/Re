@@ -20,11 +20,28 @@ public class MyAdapter extends ArrayAdapter<FriendsInfo> {
     @Override
     public View getView(int position,  View convertView,  ViewGroup parent) {
         FriendsInfo friendsInfo = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourcdID, parent, false);
+        ViewHolder viewHolder;
+        View view ;
+
+        if(convertView==null){
+            view= LayoutInflater.from(getContext()).inflate(resourcdID, parent, false);
+            viewHolder=new ViewHolder();
+            viewHolder.name = view.findViewById(R.id.name);
+            viewHolder.ip = view.findViewById(R.id.classinfo);
+            view.setTag(viewHolder);
+        }
+        else {
+            view=convertView;
+        }
         TextView name = view.findViewById(R.id.name);
         TextView ip = view.findViewById(R.id.classinfo);
-        friendsInfo.setName(friendsInfo.getName());
-        friendsInfo.setIp(friendsInfo.getIp());
+        name.setText(friendsInfo.getName());
+        ip.setText(friendsInfo.getIp());
         return view;
+
+    }
+    class ViewHolder{
+        TextView name;
+        TextView ip;
     }
 }

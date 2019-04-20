@@ -5,13 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class InfoAdapter extends RecyclerView.Adapter <InfoAdapter.ViewHolder>{
+public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.ViewHolder>{
     private  List<Info> minfo;
     static class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout leftlayout;
+        LinearLayout rightlayout;
         TextView nameview;
         TextView otherview;
         public ViewHolder(View view){
@@ -23,7 +26,7 @@ public class InfoAdapter extends RecyclerView.Adapter <InfoAdapter.ViewHolder>{
 
     }
 
-    public InfoAdapter(List<Info> infoList){
+    public ChatAdapter(List<Info> infoList){
         minfo=infoList;
     }
 
