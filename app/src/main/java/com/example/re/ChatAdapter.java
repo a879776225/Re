@@ -23,7 +23,6 @@ public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.ViewHolder>{
             otherview = view.findViewById(R.id.classinfo);
         }
 
-
     }
 
     public ChatAdapter(List<Info> infoList){
